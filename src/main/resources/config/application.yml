@@ -1,0 +1,13 @@
+application:
+  name: spring, kafka and cassandra example !
+  version: 0.0.1
+server:
+  port: 8888
+
+cassandra:
+  keyspace-name: mykeyspace
+  basePackages: com.yidoughi.domain
+  contact-points: localhost
+  protocolVersion: V4
+  port: 9042
+  schema-action: create_if_not_exists
