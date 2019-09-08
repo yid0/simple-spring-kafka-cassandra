@@ -7,14 +7,14 @@ Download Apache Kafka from the official web page https://kafka.apache.org/quicks
 
 **Create a new Topic :**
 
-    _kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions  1 --topic test-topic
+    kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions  1 --topic test-topic
 
 **Install Apache Cassandra (Docker)**
 
 Visit Docker hub : https://hub.docker.com/_/cassandra
 
 Download **Cassandra** image from the Docker Hub :
-
+    
     docker pull cassandra
     
     docker run --name cassandra -d -p 9042:9042 cassandra
