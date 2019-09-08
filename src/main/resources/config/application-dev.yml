@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active:
+    active: dev
   data:
     cassandra:
       schemaAction: create_if_not_exists
@@ -19,4 +19,5 @@ server:
     session:
       cookie:
         http-only: true
+
 

@@ -1,17 +1,17 @@
 package com.yidoughi.config;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.io.Serializable;
+/**
+ * @author yidoughi
+ */
 
-@Configuration
+@ConfigurationProperties
 @Getter @Setter
-public class Application implements Serializable {
-
+public class ApplicationInfo  {
     @Value("${application.name}")
     private String name;
 

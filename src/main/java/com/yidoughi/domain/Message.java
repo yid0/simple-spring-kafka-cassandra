@@ -4,11 +4,11 @@ import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,19 +20,32 @@ import java.util.UUID;
 public class Message implements Serializable {
 
     @CassandraType(type = DataType.Name.UUID)
-    @PrimaryKey
-    @Getter
-    private MessageKey id;
-    private String body;
-    private Map<String, String> otherData = new HashMap<>();
-    @Getter
-    private Date sent_at;
+    @PrimaryKeyColumn(name = "id", type = PrimaryKeyType.PARTITIONED)
+    private UUID id;
 
-    public String getBody() {
-        return body;
+    private String content;
+
+    private String topic;
+
+    @Column(value = "other_data")
+    private Map<String, String> otherData = new HashMap<>();
+
+    @Column(value = "sent_at")
+    private Date sentAt;
+
+    public Message() {
+        this.id = UUID.randomUUID();
+        this.setSentAt(new Date());
     }
 
-    public Date getSent_at() {
-        return sent_at;
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", topic='" + topic + '\'' +
+                ", otherData=" + otherData +
+                ", sentAt=" + sentAt +
+                '}';
     }
 }

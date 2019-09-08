@@ -1,52 +1,55 @@
 package com.yidoughi.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.SchemaAction;
+import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author yidoughi
  */
 
-@Configuration
+@ConfigurationProperties(prefix = "spring.data.cassandra")
 @EnableCassandraRepositories
 public class CassandraConfiguration  extends AbstractCassandraConfiguration {
+    public final Logger log = LoggerFactory.getLogger(CassandraConfiguration.class);
 
-    @Value("${cassandra.contactpoints}")
+    @Value("${contactPoints}")
     private String contactPoints;
 
-    @Value("${cassandra.port}")
+    @Value("${port}")
     private int port;
 
-    @Value("${cassandra.keyspacename}")
+    @Value("${keyspaceName}")
     private String keySpace;
 
-    @Value("${cassandra.basePackages}")
+    @Value("${basePackages}")
     private String basePackages;
 
-    @Override
     protected String getKeyspaceName() {
         return keySpace;
     }
 
-    @Override
-    protected String getContactPoints() {
+    public String getContactPoints() {
         return contactPoints;
     }
 
-    @Override
     protected int getPort() {
         return port;
     }
 
-    @Override
     public SchemaAction getSchemaAction() {
         return SchemaAction.CREATE_IF_NOT_EXISTS;
     }
 
-    @Override
     public String[] getEntityBasePackages() {
         return new String[] {basePackages};
     }
