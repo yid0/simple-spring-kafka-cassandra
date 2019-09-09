@@ -23,4 +23,35 @@ To access to the container :
 
     docker exec -it cassandra bash
 
+Create a keyspace :
+
+    CREATE KEYSPACE mykeyspace
+    WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 1};
+
+**REST API Test :**
+
+- Prcoduce a new message:
+
     
+    curl --header "Content-Type: application/json" \
+         --request POST \
+         --data '{"content":"hello world", "topic":"test-topic", "otherData": { "key": "value" } }' \
+         http://localhost:8888/produce
+  
+  
+- Get  all messages:
+
+
+    curl --header "Content-Type: application/json" \
+         --request GET \
+         http://localhost:8888/message
+     
+- Get message with id (UUID format): 
+
+ 
+     curl --header "Content-Type: application/json" \
+          --request GET \
+          http://localhost:8888/message/{id}
+   
+   
+     
