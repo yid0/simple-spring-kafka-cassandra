@@ -34,24 +34,18 @@ Create a keyspace :
 
     
     curl --header "Content-Type: application/json" \
-         --request POST \
-         --data '{"content":"hello world", "topic":"test-topic", "otherData": { "key": "value" } }' \
-         http://localhost:8888/produce
+         --request POST --data '{"content":"hello world", "topic":"test-topic", "otherData": { "key": "value" } }' http://localhost:8888/produce
   
   
 - Get  all messages:
 
 
-    curl --header "Content-Type: application/json" \
-         --request GET \
-         http://localhost:8888/message
+    curl --header "Content-Type: application/json" --request GET http://localhost:8888/message
      
 - Get message with id (UUID format): 
 
  
-     curl --header "Content-Type: application/json" \
-          --request GET \
-          http://localhost:8888/message/{id}
+     curl --header "Content-Type: application/json" --request GET http://localhost:8888/message/{id}
    
    
      
